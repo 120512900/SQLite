@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -96,13 +97,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 db=myHelper.getWritableDatabase();
                 Cursor cursor =db.query("info",null,null,null,null,null,null);
                 if(cursor.getCount()==0){
-                    tvshow.setText("*******"+"\n"+"No Records");
+                    tvshow.setGravity(Gravity.CENTER);
+                    tvshow.setText("*********"+"\n"+"***No Records***"+"\n"+"*********");
                     Toast.makeText(this,"NO DATA",Toast.LENGTH_SHORT).show();
                 }else{
+                    tvshow.setGravity(Gravity.LEFT);
                     cursor.moveToFirst();
                     tvshow.setText("name："+cursor.getString(0)+"\n"+"number："+cursor.getString(1)+"\n"+"email："+cursor.getString(2)+"\n");
                 }
                 while(cursor.moveToNext()){
+
                     tvshow.append("\n"+"name："+cursor.getString(0)+"\n"+"number："+cursor.getString(1)+"\n"+"email："+cursor.getString(2)+"\n");
                 cursor.close();
                 db.close();
